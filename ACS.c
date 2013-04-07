@@ -45,7 +45,7 @@ double getDistance(int length[], int n, int m){
 }
 	
 double getACS(char* String_A, char* String_B){
-unsigned long position;
+        unsigned long position;
 	/*Create the suffix tree*/
 	char strb[20];
 	strcpy(strb, String_A);
@@ -57,28 +57,28 @@ unsigned long position;
 	strcpy(str, String_B);
 	int l[strlen(str)];
 	char  substr[strlen(str)]; 
-	//char* str1 = "xyz";
-	//char* str2 = "gist";
+
 	
 	
 	int i=0;
 	int j=0;
         for(i=0; i<strlen(str); i++){
 	  l[i] =0;
-	  for(j=0; j<strlen(str)-i+1; j++){
+	  for(j=1; j<strlen(str)-i+1; j++){
 	    strncpy(substr, &str[i], j)[j] = 0;
-	    //substr[j] = '\0';
-	  // printString(substr);
+	    
+	   printString(substr);
 	    position = ST_FindSubstring(tree, substr, strlen(substr));
 	    if(position != ST_ERROR){
 		l[i] =j;
 	    }else{
-		i++;
-		j=0;
+		//printf("\nString DNE\n");
+		//i++;
+		//j=1;
 	    }
 	    
 	  }
-	//printf("%d\n", l[i]);
+	printf("%d\n", l[i]);
 	}
 	
 	//printf(" I == %d\n", i);
@@ -90,18 +90,13 @@ unsigned long position;
 int main()
 {	
 
-	char String_A[] = "mississippi";
-	char String_B[] = "lollipop";
-        SUFFIX_TREE* tree = ST_CreateTree(String_A, 11);
-	
-	ST_PrintTree(tree);
+	//char String_A[] = "philologist";
+	//char String_B[] = "lollipop";
+        
+	char String_A[] = "aaaatttttttttaaaaa";
+	char String_B[] = "aaaaaaaattttttttt";
 
-	//tree = ST_CreateTree(String_B, 8);
-	//ST_PrintTree(tree);
-
-	//getACS(String_A, String_B);
-	//getACS(String_B, String_A);
-	//double symDist;
+	double symDist;
 	symDist = (getACS(String_A, String_B) + getACS(String_B, String_A))/2;
 	printf("Symmetric distance measure = %f\n", symDist);
 	
@@ -112,6 +107,14 @@ int main()
 
 
 
+ //SUFFIX_TREE* tree = ST_CreateTree(String_A, 11);
+	
+	//ST_PrintTree(tree);
 
+	//tree = ST_CreateTree(String_B, 8);
+	//ST_PrintTree(tree);
+
+	//getACS(String_A, String_B);
+	//getACS(String_B, String_A);
 
 
